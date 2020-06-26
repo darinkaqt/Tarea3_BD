@@ -1,3 +1,5 @@
+<?php include 'validar_alumno.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,14 +27,16 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <ul class="navbar-nav">
       <li class="nav-item">
-      <a class="nav-link" href="inicio_ayud.php"><img src="..\Imagenes\imagen63.jpg" width="30" height="30"> Inicio </a>
+      <a class="nav-link" href="inicio_estudiante.php?flag_alumno=0"><img src="..\Imagenes\imagen63.jpg" width="30" height="30"> Inicio </a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="mod_estudiante.php"> Modificar datos </a>
+      <a class="nav-link" href="mod_estudiante.php?flag_mod=0"> Modificar datos </a>
       </li>
+      <?php if($_SESSION["acceso"]) { ?>
       <li class="nav-item">
       <a class="nav-link active" href="t_misiones.php"> Misiones asignadas </a>
       </li>
+      <?php } ?>
     </ul>
   </div>  
 </nav>

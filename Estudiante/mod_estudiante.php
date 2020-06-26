@@ -1,3 +1,5 @@
+<?php include 'validar_alumno.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,11 +28,16 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <ul class="navbar-nav">
       <li class="nav-item">
-      <a class="nav-link" href="inicio_estudiante.php"><img src="..\Imagenes\imagen63.jpg" width="30" height="30"> Inicio </a>
+      <a class="nav-link" href="inicio_estudiante.php?flag_alumno=0"><img src="..\Imagenes\imagen63.jpg" width="30" height="30"> Inicio </a>
       </li>
       <li class="nav-item">
-      <a class="nav-link active" href="mod_estudiante.php"> Modificar datos </a>
+      <a class="nav-link active" href="mod_estudiante.php?flag_mod=0"> Modificar datos </a>
       </li>
+      <?php if($_SESSION["acceso"]) { ?>
+      <li class="nav-item">
+      <a class="nav-link" href="t_misiones.php"> Misiones asignadas </a>
+      </li>
+      <?php } ?>
     </ul>
   </div>  
 </nav>
@@ -50,47 +57,38 @@
     <div class="col-sm-1">
     </div>
     <div class="col-sm-6">
-      <?php if($_GET["flag_recompensa"]==1){ ?>
+      <?php if($_GET["flag_mod"]==1){ ?>
       <div class="container-sm">
                 <div class="alert alert-success">
                 <button class="close" data-dismiss=alert><span>&times;</span></button>
-                La recompensa de la misión fue actualizada!!
+                Actualizado correctamente!
                 </div>
       </div>
-      <?php } elseif($_GET["flag_recompensa"]==2){ ?>
+      <?php } elseif($_GET["flag_mod"]==2){ ?>
       <div class="container-sm">
                 <div class="alert alert-danger">
                 <button class="close" data-dismiss=alert><span>&times;</span></button>
-                <strong>Error:</strong> La misión no existe!!
-                </div>
-      </div>
-      <?php } elseif($_GET["flag_recompensa"]==3){ ?>
-      <div class="container-sm">
-                <div class="alert alert-danger">
-                <button class="close" data-dismiss=alert><span>&times;</span></button>
-                <strong>Error:</strong> Los campos son obligatorios.
+                <strong>Error:</strong> Ingrese datos para actualizar
                 </div>
       </div>
       <?php } ?>
-      <h3>Por favor ingrese los datos que quiera modificar</h3>
+      <h3>Rellene los datos que quiera modificar</h3>
       <br>
-        <form action="form_recompensa.php" method="POST">
+        <form action="../Formulario/form_mod_alumno.php" method="POST">
           <div class="form-group">
             <label for="nombre">Nombre:</label>
             <input type="text" class="form-control" placeholder="Ej: Brad" id="nombre" name="nombre">
           </div>
-        <button type="submit" class="btn btn-primary">Cambiar</button>
 
         <br><br>
-        <form action="form_recompensa.php" method="POST">
+        <form action="../Formulario/form_mod_alumno.php" method="POST">
           <div class="form-group">
             <label for="apellido">Apellido:</label>
             <input type="text" class="form-control" placeholder="Ej: Pitt" id="apellido" name="apellido">
           </div>
-        <button type="submit" class="btn btn-primary">Cambiar</button>
 
         <br><br>
-        <form action="form_recompensa.php" method="POST">
+        <form action="../Formulario/form_mod_alumno.php" method="POST">
           <div class="form-group">
             <label for="contrasenia">Contraseña:</label>
             <input type="text" class="form-control" placeholder="Ej: Contraseña123" id="contrasenia" name="contrasenia">

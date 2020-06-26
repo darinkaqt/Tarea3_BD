@@ -64,7 +64,7 @@
       <h3>Bienvenido estudiante!</h3>
       <br>
       <h5>Por favor ingrese sus datos para registrarse</h5>
-        <form action="form_alumno.php" method="POST"> 
+        <form action="..\Formulario\form_reg_alumno.php" method="POST"> 
           <div class="form-group">
             <label for="rolAlumno">Ingrese su Rol:</label>
             <input type="text" class="form-control" placeholder="Ej: 202073012" id="rolAlumno" name="rolAlumno">
