@@ -55,7 +55,7 @@
           <div class="container-sm">
                     <div class="alert alert-danger">
                     <button class="close" data-dismiss=alert><span>&times;</span></button>
-                    <strong>Error:</strong> Debe ingresar un rol para el estudiante.
+                    <strong>Error:</strong> Debe ingresar un rol para el estudiante y/o contraseña.
                     </div>
           </div>
           <?php } ?>

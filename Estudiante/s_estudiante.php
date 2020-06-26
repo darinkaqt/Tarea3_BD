@@ -73,7 +73,7 @@
             <label for="nombreAlumno">Ingrese su Contraseña:</label>
             <input type="text" class="form-control" placeholder="Ej: contraseña" id="nombreAlumno" name="nombreAlumno">
           </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-primary">Ingresar</button>
     <!-- FALTA VERIFICAR SI EL ESTUDIANTE ES AYUDANTE O NO -->
   </div>
 </div>
