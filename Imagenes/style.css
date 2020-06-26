@@ -1,0 +1,17 @@
+.fakeimg {
+    height: 200px;
+    background: #aaa;
+}
+
+.hero-image {
+    background-image: url("imagen1.jpg");
+    height: 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+    background-image: url("imagen9.jpg");
+    background-color: #cccccc;
+}

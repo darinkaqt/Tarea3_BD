@@ -1,0 +1,41 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(sansation_light.woff);
+}
+
+table {
+    border: 2px solid #2e325a;
+    border-collapse: collapse;
+    width: 100%;
+    color: white;
+    background-color: grey;
+    font-family: myFirstFont;
+    font-size: 16px;
+    text-align: center;
+}
+
+th {
+    background-color: #2e325a;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(165, 160, 160);
+}
+
+.fakeimg {
+    height: 200px;
+    background: #aaa;
+}
+
+.hero-image {
+    background-image: url("imagen1.jpg");
+    height: 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+    background-image: url("imagen9.jpg");
+    background-color: #cccccc;
+}
