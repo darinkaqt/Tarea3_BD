@@ -41,14 +41,14 @@
           <div class="container-sm">
                     <div class="alert alert-success">
                     <button class="close" data-dismiss=alert><span>&times;</span></button>
-                    El registro del estudiante fue exitoso!!
+                    Sesion iniciada como alumno.
                     </div>
           </div>
           <?php } elseif($_GET["flag_alumno"]==2){ ?>
           <div class="container-sm">
                     <div class="alert alert-danger">
                     <button class="close" data-dismiss=alert><span>&times;</span></button>
-                    <strong>Error:</strong> El estudiante ya se encuentra registrado.
+                    <strong>Error:</strong> El estudiante no se encuentra registrado.
                     </div>
           </div>
           <?php } elseif($_GET["flag_alumno"]==3){ ?>
@@ -58,20 +58,28 @@
                     <strong>Error:</strong> Debe ingresar un rol para el estudiante.
                     </div>
           </div>
+          <?php } elseif($_GET["flag_alumno"]==4){ ?>
+          <div class="container-sm">
+                    <div class="alert alert-danger">
+                    <button class="close" data-dismiss=alert><span>&times;</span></button>
+                    <strong>Error:</strong> Contraseña incorrecta.
+                    </div>
+          </div>
           <?php } ?>
+
 
           
       <h3>Bienvenido estudiante!</h3>
       <br>
       <h5>Por favor ingrese sus datos para iniciar sesión</h5>
-        <form action="form_alumno.php" method="POST"> 
+        <form action="../Formulario/form_ses_alumno.php" method="POST"> 
           <div class="form-group">
             <label for="rolAlumno">Ingrese su Rol:</label>
             <input type="text" class="form-control" placeholder="Ej: 202073012" id="rolAlumno" name="rolAlumno">
           </div>
           <div class="form-group">
-            <label for="nombreAlumno">Ingrese su Contraseña:</label>
-            <input type="text" class="form-control" placeholder="Ej: contraseña" id="nombreAlumno" name="nombreAlumno">
+            <label for="contrasenia">Ingrese su Contraseña:</label>
+            <input type="text" class="form-control" placeholder="Ej: contraseña" id="contrasenia" name="contrasenia">
           </div>
     <button type="submit" class="btn btn-primary">Ingresar</button>
     <!-- FALTA VERIFICAR SI EL ESTUDIANTE ES AYUDANTE O NO -->

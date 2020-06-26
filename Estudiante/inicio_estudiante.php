@@ -1,3 +1,5 @@
+<?php include 'validar_alumno.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,11 +28,16 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <ul class="navbar-nav">
       <li class="nav-item">
-      <a class="nav-link active" href="..\p_inicio.php"><img src="..\Imagenes\imagen63.jpg" width="30" height="30"> Inicio </a>
+      <a class="nav-link active" href="inicio_estudiante.php?flag_alumno=0"><img src="..\Imagenes\imagen63.jpg" width="30" height="30"> Inicio </a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="mod_estudiante.php"> Modificar datos </a>
+      <a class="nav-link" href="mod_estudiante.php?flag_mod=0"> Modificar datos </a>
       </li>
+      <?php if($_SESSION["acceso"]) { ?>
+      <li class="nav-item">
+      <a class="nav-link" href="t_misiones.php"> Misiones asignadas </a>
+      </li>
+      <?php } ?>
     </ul>
   </div>  
 </nav>
@@ -39,11 +46,20 @@
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-2">
-    <h4> Bienvenido Estudiante! </h4>
     </div>
     <div class="col-sm-1">
     </div>
     <div class="col-sm-7">
+    <?php if($_GET["flag_alumno"]==1){ ?>
+      <div class="container-sm">
+        <div class="alert alert-success">
+          <button class="close" data-dismiss=alert><span>&times;</span></button>
+          Sesion iniciada!
+        </div>
+      </div>
+    <?php } ?>
+      <h3><?php echo ($_SESSION["acceso"]) ? "Bienvenido Ayudante" : "Bienvenido Alumno" ?><h3>
+      <br>
       <h4>¿Por qué estamos aquí?</h4>
       <br>
       <p>Una base de datos es un conjunto de datos pertenecientes a un mismo contexto y almacenados sistemáticamente para su posterior uso. En este sentido; una biblioteca puede considerarse una base de datos compuesta en su mayoría por documentos y textos impresos en papel e indexados para su consulta. Actualmente, y debido al desarrollo tecnológico de campos como la informática y la electrónica, la mayoría de las bases de datos están en formato digital, siendo este un componente electrónico, por tanto se ha desarrollado y se ofrece un amplio rango de soluciones al problema del almacenamiento de datos.<br><br>
@@ -57,6 +73,10 @@
       Ignacio Ulloa<br>
       Raul Cruz
       </p>
+
+      
+      <form action="../cerrar_sesion.php" method="POST">
+      <button type="submit" class="btn btn-warning">Cerrar sesion</button>
           
   </div>
 </div>

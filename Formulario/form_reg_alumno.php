@@ -1,4 +1,4 @@
-<?php include 'db_config.php';
+<?php include '../db_config.php';
 session_start();
 
 
@@ -19,23 +19,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = pg_query_params($dbconn, $sql_ver, array($rolAlumno));
     $row = pg_fetch_row($result);
 
-    if(($rolAlumno != NULL) & ($contrasenia != NULL)){
+    if(($rolAlumno != NULL) && ($contrasenia != NULL)){
         if(!$row) {
             $opciones = array('cost'=>12);
             $contrasenia_hasheada = password_hash($contrasenia, PASSWORD_BCRYPT, $opciones);
-            password_verify($contrasenia, $contrasenia_hasheada);
 
             $sql = 'INSERT INTO Alumno (rolalumno, nombre, apellido, anioingreso, contrasenia) VALUES ($1, $2, $3, $4, $5)';
-            pg_query_params($dbconn, $sql, array($rolAlumno,$nombreAlumno,$apellidoAlumno,$anioingreso,$contrasenia));
+            pg_query_params($dbconn, $sql, array($rolAlumno,$nombreAlumno,$apellidoAlumno,$anioingreso,$contrasenia_hasheada));
             pg_close($dbconn);
-            header("Location: p_estudiante.php?flag_alumno=1");
+            session_destroy();
+            header("Location: ../Estudiante/r_estudiante.php?flag_alumno=1");
         }
         else{
-            header("Location: p_estudiante.php?flag_alumno=2");
+            session_destroy();
+            header("Location: ../Estudiante/r_estudiante.php?flag_alumno=2");
         }
     }
     else{
-        header("Location: p_estudiante.php?flag_alumno=3");
+        session_destroy();
+        header("Location: ../Estudiante/r_estudiante.php?flag_alumno=3");
     }
 }
 ?>
