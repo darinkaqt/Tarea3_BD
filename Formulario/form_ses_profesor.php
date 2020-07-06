@@ -21,22 +21,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if(password_verify($contrasenia, $pass_hasheada[0])){
                 pg_close($dbconn);
 
+                $_SESSION["acceso"] = 2; //profesor
                 $_SESSION["idProfesor"] = $idProfesor;
 
-                header("Location: ../Profesor/inicio_profesor.php?flag_alumno=1");
+                header("Location: ../Profesor/inicio_profesor.php?flag_mod=1");
             }
             else{
                 pg_close($dbconn);
-                header("Location: ../Profesor/s_profesor.php?flag_alumno=4");
+                header("Location: ../Profesor/s_profesor.php?flag_mod=4");
             }
 
         }
         else{
-            header("Location: ../Profesor/s_profesor.php?flag_alumno=2");
+            header("Location: ../Profesor/s_profesor.php?flag_mod=2");
         }
     }
     else{
-        header("Location: ../Profesor/s_profesor.php?flag_alumno=3");
+        header("Location: ../Profesor/s_profesor.php?flag_mod=3");
     }
 }
 ?>

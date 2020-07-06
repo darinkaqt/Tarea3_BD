@@ -21,25 +21,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if(password_verify($contrasenia, $pass_hasheada[0])){
                 $acc_ver = 'SELECT rolayudante FROM Ayudantia WHERE rolayudante = $1';
                 $acc_result = pg_query_params($dbconn, $acc_ver, array($rolAlumno));
-                $_SESSION["acceso"] = pg_fetch_row($acc_result);
+                $aux = pg_fetch_row($acc_result);
                 pg_close($dbconn);
+                
+                if($aux) $_SESSION["acceso"] = 1; //ayudante
+                else $_SESSION["acceso"] = 0; //alumno
 
                 $_SESSION["rolAlumno"] = $rolAlumno;
 
-                header("Location: ../Estudiante/inicio_estudiante.php?flag_alumno=1");
+                header("Location: ../Estudiante/inicio_estudiante.php?flag_mod=1");
             }
             else{
                 pg_close($dbconn);
-                header("Location: ../Estudiante/s_estudiante.php?flag_alumno=4");
+                header("Location: ../Estudiante/s_estudiante.php?flag_mod=4");
             }
-
         }
         else{
-            header("Location: ../Estudiante/s_estudiante.php?flag_alumno=2");
+            header("Location: ../Estudiante/s_estudiante.php?flag_mod=2");
         }
     }
     else{
-        header("Location: ../Estudiante/s_estudiante.php?flag_alumno=3");
+        header("Location: ../Estudiante/s_estudiante.php?flag_mod=3");
     }
 }
 ?>

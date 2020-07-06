@@ -27,15 +27,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
             pg_close($dbconn);
-            header("Location: ../Profesor/p_anadirmision.php?flag_anadirmision=1&id_mision=$id_mis");
+            header("Location: ../Profesor/p_anadirmision.php?flag_mod=1&id_mision=$id_mis");
         }
         else{
             pg_close($dbconn);
-            header("Location: ../Profesor/p_anadirmision.php?flag_anadirmision=2");
+            header("Location: ../Profesor/p_anadirmision.php?flag_mod=2");
         }
     }
     else{
-        header("Location: ../Profesor/p_anadirmision.php?flag_anadirmision=3");
+        header("Location: ../Profesor/p_anadirmision.php?flag_mod=3");
     }
 }
 ?>

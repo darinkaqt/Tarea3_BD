@@ -28,16 +28,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             pg_query_params($dbconn, $sql, array($rolAlumno,$nombreAlumno,$apellidoAlumno,$anioingreso,$contrasenia_hasheada));
             pg_close($dbconn);
             session_destroy();
-            header("Location: ../Estudiante/r_estudiante.php?flag_alumno=1");
+            header("Location: ../Estudiante/r_estudiante.php?flag_mod=1");
         }
         else{
             session_destroy();
-            header("Location: ../Estudiante/r_estudiante.php?flag_alumno=2");
+            header("Location: ../Estudiante/r_estudiante.php?flag_mod=2");
         }
     }
     else{
         session_destroy();
-        header("Location: ../Estudiante/r_estudiante.php?flag_alumno=3");
+        header("Location: ../Estudiante/r_estudiante.php?flag_mod=3");
     }
 }
 ?>
