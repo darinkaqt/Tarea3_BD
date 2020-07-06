@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     pg_close($dbconn);
 
-    if(flagg){
+    if($flagg){
         header("Location: ../Estudiante/mod_estudiante.php?flag_mod=1");
     }
     else{
