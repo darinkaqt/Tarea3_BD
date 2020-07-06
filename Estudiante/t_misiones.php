@@ -36,6 +36,9 @@
       <li class="nav-item">
       <a class="nav-link active" href="t_misiones.php"> Misiones asignadas </a>
       </li>
+      <li class="nav-item">
+      <a class="nav-link" href="p_asignarmision.php"> Asignar misión </a>
+      </li>
       <?php } ?>
     </ul>
   </div>  
@@ -63,19 +66,44 @@
 
       <?php
       include '..\db_config.php';
-      $sql = "SELECT * FROM Mision";
-      $result = pg_query($dbconn, $sql);
-      if( pg_num_rows($result) > 0 ) {
-        while($row = pg_fetch_assoc($result)) {
-          echo "<tr><td>" . $row["idmision"]. "</td><td>" . $row["idprofesor"] . "</td><td>". $row["idalumno"]. "</td><td>". $row["fechaingreso"]. "</td><td>". $row["estado"]. "</td><td>". $row["descripcion"]. "</td><td>". $row["recompensa"]. "</td></tr>";
+      session_start();
+      // Obtener idAyudantia del rolAlumno , segun yo si
+      $sql1 = 'SELECT * FROM ayudantia WHERE rolayudante = $1';
+      $result1 = pg_query_params($dbconn, $sql1, array($_SESSION["rolAlumno"]));
+      pg_close($dbconn);
+      echo "$result1[0]"; 
+      if( pg_num_rows($result1) > 0 ) {
+        while($idayud = pg_fetch_assoc($result1)) {
+          // Obtener idMision de cada idAyudantia desde la tabla Asignacion
+          $sql2 = 'SELECT idmision FROM asignacion WHERE idayudantia = $1';
+          $idmision = pg_query_params($dbconn, $sql2, array($idayud));
+          pg_close($dbconn);
+          echo $idmision[0];  //entonces??hablaron al mismo tiempo xd asidaj 
+          while($idm = pg_fetch_assoc($idmision)){
+            // Aqui obtengo los datos de esa mision
+            echo "entre";
+            $sql3 = 'SELECT * FROM mision WHERE idmision = $1';
+            $row = pg_query_params($dbconn, $sql3, array($idm)); //eso segun yo no vale pq mira
+            echo "<tr><td>" . $row[0]. "</td><td>" . $row[1] . "</td><td>". $row[2]. "</td><td>". $row[3]. "</td><td>". $row[4]. "</td><td>". $row[5]. "</td><td>". $row[6]. "</td></tr>";
+          }
+
+          /* Imprimir misiones asignadas al Ayudante
+          if( pg_num_rows($misiones) > 0 ) {  
+            echo "</table>";
+            pg_close($dbconn);
+          }
+          else{
+            echo "</table>";
+            pg_close($dbconn);
+          }*/
         }
         echo "</table>";
-        pg_close($dbconn);
       }
       else{
         echo "</table>";
         pg_close($dbconn);
       }
+
       ?>
       </table>
 

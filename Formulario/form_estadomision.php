@@ -1,4 +1,5 @@
-<?php include 'db_config.php';
+<?php include '../db_config.php';
+session_start();
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -9,23 +10,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result2 = pg_query_params($dbconn, $sql_2, array($idMision));
     $row2 = pg_fetch_all($result2);
 
-    if($row2[0]!==NULL){
-        if ($row2[0]['estado'] == 0){
-            $valor=1;
-            $string='completa';
+    if($idMision){
+        if($row2[0]!==NULL){
+            if ($row2[0]['estado'] == 0){
+                $valor=1;
+                $string='completa';
+            }
+            else if ($row2[0]['estado'] == 1){
+                $valor=0;
+                $string='incompleta';
+            }
+            $sql = 'UPDATE Mision SET estado = $2 WHERE idmision = $1';
+            pg_query_params($dbconn, $sql, array($idMision, $valor));
+            pg_close($dbconn);
+            header("Location: ../Profesor/p_estadomision.php?flag_estado=1&est=$string");
         }
-        else if ($row2[0]['estado'] == 1){
-            $valor=0;
-            $string='incompleta';
+        else{
+            pg_close($dbconn); 
+            header("Location: ../Profesor/p_estadomision.php?flag_estado=2");
         }
-        $sql = 'UPDATE Mision SET estado = $2 WHERE idmision = $1';
-        pg_query_params($dbconn, $sql, array($idMision, $valor));
-        pg_close($dbconn);
-        header("Location: p_estadomision.php?flag_estado=1&est=$string");
     }
     else{
         pg_close($dbconn); 
-        header("Location: p_estadomision.php?flag_estado=2");
+        header("Location: ../Profesor/p_estadomision.php?flag_estado=3");
     }
 }
 ?>

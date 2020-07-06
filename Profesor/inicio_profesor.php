@@ -44,6 +44,9 @@
       <li class="nav-item">
       <a class="nav-link" href="imparticion.php?flag_mod=0"> Imparticion </a>
       </li>
+      <li class="nav-item">
+      <a class="nav-link" href="mision.php?flag_mod=0"> Misiones </a>
+      </li>
     </ul>
   </div>  
 </nav>

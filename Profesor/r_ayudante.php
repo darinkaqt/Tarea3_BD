@@ -1,3 +1,5 @@
+<?php include 'validar_profesor.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

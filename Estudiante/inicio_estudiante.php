@@ -37,6 +37,9 @@
       <li class="nav-item">
       <a class="nav-link" href="t_misiones.php"> Misiones asignadas </a>
       </li>
+      <li class="nav-item">
+      <a class="nav-link" href="p_asignarmision.php"> Asignar misión </a>
+      </li>
       <?php } ?>
     </ul>
   </div>  

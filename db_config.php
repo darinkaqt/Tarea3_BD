@@ -1,6 +1,6 @@
 <?php
 // detalles de la conexion
-$conn_string = "host=localhost port=5432 dbname=tarea2 user=postgres password=Spike4421";
+$conn_string = "host=localhost port=5432 dbname=tarea3 user=postgres password=Spike4421";
 // se reemplaza "<contraseña>" por su contraseña, no se incluyen los "<>"
 // establecemos una conexion con el servidor postgresSQL
 $dbconn = pg_connect($conn_string);

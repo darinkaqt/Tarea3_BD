@@ -1,3 +1,5 @@
+<?php include 'validar_alumno.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="../Imagenes/style.css">
 </head>
 <body>
 
@@ -22,26 +24,23 @@
   </div>
 </div>
 
+<!-- Encabezado -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="p_inicio.php"><img src="imagen63.jpg" width="30" height="30"> Inicio </a>
+      <a class="nav-link" href="inicio_estudiante.php?flag_alumno=0"><img src="..\Imagenes\imagen63.jpg" width="30" height="30"> Inicio </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="p_anadirmision.php?flag_anadirmision=0">Añadir Misión</a>
+      <a class="nav-link" href="mod_estudiante.php?flag_mod=0"> Modificar datos </a>
+      </li>
+      <?php if($_SESSION["acceso"]) { ?>
+      <li class="nav-item">
+      <a class="nav-link" href="t_misiones.php"> Misiones asignadas </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="p_estadomision.php?flag_estado=0">Cambiar estado misión</a>
+      <a class="nav-link active" href="p_asignarmision.php"> Asignar misión </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="p_recompensa.php?flag_recompensa=0">Modificar recompensas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="p_asignarmision.php?flag_asignarmision=0">Asignar misión</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="p_tablas.php">Datos tabulados</a>
-      </li>
+      <?php } ?>
     </ul>
   </div>  
 </nav>
@@ -64,17 +63,31 @@
       <div class="container-sm">
                 <div class="alert alert-success">
                 <button class="close" data-dismiss=alert><span>&times;</span></button>
-                La misión fue asignada al ayudante!!
+                La misión fue asignada correctamente!!
                 </div>
       </div>
       <?php } elseif($_GET["flag_asignarmision"]==2){ ?>
       <div class="container-sm">
                 <div class="alert alert-danger">
                 <button class="close" data-dismiss=alert><span>&times;</span></button>
-                <strong>Error:</strong> La misión y/o el ayudante no están registrados.
+                <strong>Error:</strong> La misión no está registrada.
                 </div>
       </div>
       <?php } elseif($_GET["flag_asignarmision"]==3){ ?>
+      <div class="container-sm">
+                <div class="alert alert-danger">
+                <button class="close" data-dismiss=alert><span>&times;</span></button>
+                <strong>Error:</strong> el idAyudantia no te pertenece
+                </div>
+      </div>
+      <?php } elseif($_GET["flag_asignarmision"]==4){ ?>
+      <div class="container-sm">
+                <div class="alert alert-danger">
+                <button class="close" data-dismiss=alert><span>&times;</span></button>
+                <strong>Error:</strong> Asignación ya registrada
+                </div>
+      </div>
+      <?php } elseif($_GET["flag_asignarmision"]==5){ ?>
       <div class="container-sm">
                 <div class="alert alert-danger">
                 <button class="close" data-dismiss=alert><span>&times;</span></button>
@@ -82,17 +95,17 @@
                 </div>
       </div>
       <?php } ?>
-      <h3>Asignar misión a un ayudante!</h3>
+      <h3>Asignate una misión!</h3>
       <br>
       <h5>Por favor ingrese los siguientes datos:</h5>
-          <form action="form_asignarmision.php" method ="POST">
+          <form action="../Formulario/form_asignarmision.php" method ="POST">
           <div class="form-group">
             <label for="idMision">Id de la misión:</label>
             <input type="text" class="form-control" placeholder="Ej: 12345" id="idMision" name="idMision">
           </div>
           <div class="form-group">
-            <label for="rolAyudante">Rol ayudante:</label>
-            <input type="text" class="form-control" placeholder="Ej: 202012123" id="rolAyudante" name="rolAyudante">
+            <label for="idAyudantia">Id de la ayudantia:</label>
+            <input type="text" class="form-control" placeholder="Ej: 12345" id="idAyudantia" name="idAyudantia">
           </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
   </div>
