@@ -28,12 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         pg_close($dbconn);
-        session_destroy();
-        header("Location: ../Profesor/r_profesor.php?flag_alumno=1&id_p=$id_pro");
+        header("Location: ../Profesor/r_profesor.php?flag_mod=1&id_p=$id_pro");
     }
     else{
-        session_destroy();
-        header("Location: ../Profesor/r_profesor.php?flag_alumno=3");
+        header("Location: ../Profesor/r_profesor.php?flag_mod=3");
     }
 }
 ?>

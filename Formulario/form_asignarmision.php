@@ -9,7 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($idAyudantia == '') $idAyudantia = NULL;
     
     if($idMision !== NULL && $idAyudantia !== NULL){
-        $sql_1 = 'SELECT idmision FROM Mision WHERE idmision = $1';
+        //id mision
+        $sql_1 = 'SELECT * FROM Mision WHERE idmision = $1';
         $result1 = pg_query_params($dbconn, $sql_1, array($idMision));
         $row1 = pg_fetch_row($result1);
 
@@ -21,31 +22,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result3 = pg_query_params($dbconn, $sql_3, array($idAyudantia, $idMision));
         $row3 = pg_fetch_row($result3);
 
+        $sql_4 = 'SELECT * FROM Mision WHERE (idmision = $2 and idalumno = $1)';
+        $result4 = pg_query_params($dbconn, $sql_4, array($_SESSION["rolAlumno"], $idMision));
+        $row4 = pg_fetch_row($result4);
+
         if(!$row3){
             if($row2){
                 if($row1){
-                    $sql = 'INSERT INTO Asignacion(idayudantia,idmision) VALUES ($1, $2)';
-                    pg_query_params($dbconn, $sql, array($idAyudantia, $idMision));
-                    pg_close($dbconn);
-                    header("Location: ../Estudiante/p_asignarmision.php?flag_asignarmision=1");
+                    if($row4){
+                        pg_close($dbconn);
+                        header("Location: ../Estudiante/p_asignarmision.php?flag_mod=6");
+                    }
+                    else {
+                        $sql = 'INSERT INTO Asignacion(idayudantia,idmision) VALUES ($1, $2)';
+                        pg_query_params($dbconn, $sql, array($idAyudantia, $idMision));
+                        pg_close($dbconn);
+                        header("Location: ../Estudiante/p_asignarmision.php?flag_mod=1");
+                    }
                 }
                 else{
                     pg_close($dbconn);
-                    header("Location: ../Estudiante/p_asignarmision.php?flag_asignarmision=2");
+                    header("Location: ../Estudiante/p_asignarmision.php?flag_mod=2");
                 }
             }
             else{
                 pg_close($dbconn);
-                header("Location: ../Estudiante/p_asignarmision.php?flag_asignarmision=3");
+                header("Location: ../Estudiante/p_asignarmision.php?flag_mod=3");
             }
         }
         else{
             pg_close($dbconn);
-            header("Location: ../Estudiante/p_asignarmision.php?flag_asignarmision=4");
+            header("Location: ../Estudiante/p_asignarmision.php?flag_mod=4");
         }
     }
     else{
-        header("Location: ../Estudiante/p_asignarmision.php?flag_asignarmision=5");
+        header("Location: ../Estudiante/p_asignarmision.php?flag_mod=5");
     }
 }
 ?>
