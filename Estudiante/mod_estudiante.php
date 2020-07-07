@@ -39,14 +39,14 @@
             <input type="text" class="form-control" placeholder="Ej: Brad" id="nombre" name="nombre">
           </div>
 
-        <br><br>
+        <br>
         <form action="../Formulario/form_mod_alumno.php" method="POST">
           <div class="form-group">
             <label for="apellido">Apellido:</label>
             <input type="text" class="form-control" placeholder="Ej: Pitt" id="apellido" name="apellido">
           </div>
 
-        <br><br>
+        <br>
         <form action="../Formulario/form_mod_alumno.php" method="POST">
           <div class="form-group">
             <label for="contrasenia">Contraseña:</label>
